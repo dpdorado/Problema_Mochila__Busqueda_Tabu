@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wYbQwXjh2Ulitzm1EAcWPYfhI615+0fuDwkOOy8FOWuUXsksi3CXxZOoob9F9RdWY//aMEvo62MpCvtnXk2pnQ==",
+  "dgSpecHash": "KJKg4etKjf50qFS6e6CvoiPrCkqezdGbbY63cMdRnwsUWye7Wes9kpMKcrTzcqbGbfcEpCnuw60CnMN2eWkknA==",
   "success": true,
-  "projectFilePath": "/home/dpdaniel/Pruebas/Parcial 1 - Metaheuristicas/Problema-Mochila/Problema-Mochila.csproj",
+  "projectFilePath": "/home/dpdaniel/Pruebas/Parcial 1 - Metaheuristicas/Problema_Mochila__Busqueda_Tabu/Problema-Mochila/Problema-Mochila.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

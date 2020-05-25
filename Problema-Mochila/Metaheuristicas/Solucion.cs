@@ -221,5 +221,11 @@ namespace OptimizacionBinaria.Metaheuristicas
         {
             return this.fitness == this.miProblema.OptimalKnown?true:false;
         }
+        public bool seEncontroOptimo()
+        {
+            return this.esOptimoConocido();
+        }
+
+      
     }
 }

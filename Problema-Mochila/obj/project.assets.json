@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/dpdaniel/Pruebas/Parcial 1 - Metaheuristicas/Problema-Mochila/Problema-Mochila.csproj",
+      "projectUniqueName": "/home/dpdaniel/Pruebas/Parcial 1 - Metaheuristicas/Problema_Mochila__Busqueda_Tabu/Problema-Mochila/Problema-Mochila.csproj",
       "projectName": "Problema-Mochila",
-      "projectPath": "/home/dpdaniel/Pruebas/Parcial 1 - Metaheuristicas/Problema-Mochila/Problema-Mochila.csproj",
+      "projectPath": "/home/dpdaniel/Pruebas/Parcial 1 - Metaheuristicas/Problema_Mochila__Busqueda_Tabu/Problema-Mochila/Problema-Mochila.csproj",
       "packagesPath": "/home/dpdaniel/.nuget/packages/",
-      "outputPath": "/home/dpdaniel/Pruebas/Parcial 1 - Metaheuristicas/Problema-Mochila/obj/",
+      "outputPath": "/home/dpdaniel/Pruebas/Parcial 1 - Metaheuristicas/Problema_Mochila__Busqueda_Tabu/Problema-Mochila/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/dpdaniel/.nuget/NuGet/NuGet.Config"
