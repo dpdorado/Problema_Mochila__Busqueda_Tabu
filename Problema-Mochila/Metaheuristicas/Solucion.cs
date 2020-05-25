@@ -188,7 +188,7 @@ namespace OptimizacionBinaria.Metaheuristicas
         private Boolean estaEnlalistaTabu(int parDimension, ArrayList listaTabu)
         {
             Boolean varResultado = false;
-            foreach(caracteristica obj in listaTabu)
+            foreach(Caracteristica obj in listaTabu)
             {
                 if(obj.atrCaracteristica == parDimension)
                 {

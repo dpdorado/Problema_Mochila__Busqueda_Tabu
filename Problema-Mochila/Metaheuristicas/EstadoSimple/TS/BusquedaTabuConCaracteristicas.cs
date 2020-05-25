@@ -1,19 +1,19 @@
-﻿using System;
-using OptimizacionBinaria.Funciones;
+using System;
 using System.Collections;
+using OptimizacionBinaria.Funciones;
 
 namespace OptimizacionBinaria.Metaheuristicas.EstadoSimple.TS
 {
-    public class BusquedaTabuCaracterizada : Algoritmo
+    public class BusquedaTabuConCaracteristicas : Algoritmo
     {
-        //Atributos
+        public int MaxLongitudListaTabu;
         public int atrNumeroTweaks;
         private ArrayList atrListaTabu = new ArrayList();
         public double pm = 0.5;
         public double radio = 10;
         public int atrIteracionActual;
-        public int atrTimeTabu;            
-       
+
+
         public override void Ejecutar(Knapsack parProblema, Random ParAleatorio)
         {
             EFOs = 0;
@@ -22,14 +22,13 @@ namespace OptimizacionBinaria.Metaheuristicas.EstadoSimple.TS
             S.InicializarAleatorio(ParAleatorio);
             MejorSolucion = new Solucion(S);
             // Agrego la Mejor solución a la lista Tabú            
-            this.AddListaCarateristicas(S,this.atrIteracionActual = 1);
+            this.AddListaCarateristicas(S,this.atrIteracionActual = 0);
             while (EFOs < this.MaxEFOs && !MejorSolucion.esOptimoConocido())
             {
                 this.atrIteracionActual++;
                 // Remover de la lista Tabú todas las tublas en la iteracion c - d > l
                 this.DeleteListaCaracteristicas();
-                var R = new Solucion(S);                
-                //TODO: Revisar el Tweak, R.Tweak(Copy(S), L)
+                var R = new Solucion(S);                               
                 R.Tweak(ParAleatorio, pm, radio, this.atrListaTabu);
                 for (var i = 0; i < this.atrNumeroTweaks - 1; i++)
                 {
@@ -42,64 +41,66 @@ namespace OptimizacionBinaria.Metaheuristicas.EstadoSimple.TS
                 S = R;
                 this.AddListaCarateristicas(S, atrIteracionActual);
                 if (S.fitness > MejorSolucion.fitness)
-                    MejorSolucion = new Solucion(S);
+                    MejorSolucion = new Solucion(S);            
             }
 
         }
+
         private void AddListaCarateristicas(Solucion parSolucion, int parIteracion)
         {
             // 1. Obtener el vector solución
             int[] Dimensiones = parSolucion.getDimensiones();
 
             // 2. Obtener las características imersas o unos dentro de la solución sus dimensiones???
-            for (var i = 0; i <= Dimensiones.Length - 1; i++)
+            for (var i = 0; i < Dimensiones.Length; i++)
             {
-                if (Dimensiones[i] == 1)
+                if (Dimensiones[i] == 1 && !this.estaCaracteristica(i))
                 {
-                    caracteristica objCaracteristica = new caracteristica(i, parIteracion);
+                    Caracteristica objCaracteristica = new Caracteristica(i, parIteracion);
                     //3. Guardar en la lista Tabú
                     this.atrListaTabu.Add(objCaracteristica);
                 }
             }
             
+        }   
+
+        private bool estaCaracteristica(int i){
+            var resultado = false;
+            foreach(Caracteristica c in this.atrListaTabu){
+                if (c.getCaracteristica() == i)
+                {
+                    resultado = true;
+                    break;
+                }
+            }
+            return resultado;
         }
         private void DeleteListaCaracteristicas()
         {
-            for(var i = 0; i <= this.atrListaTabu.Count-1 ; i++)
+            for(var i = 0; i < this.atrListaTabu.Count ; i++)
             {
-                if (this.atrIteracionActual - ((caracteristica)atrListaTabu[i]).atrIteracion > this.atrTimeTabu)
+                if (this.atrIteracionActual - ((Caracteristica)atrListaTabu[i]).atrIteracion > this.MaxLongitudListaTabu)
                 {
                     this.atrListaTabu.RemoveAt(i);
                 }
             }
-        }
-        private Boolean perteneceListaTabu(Solucion parSolucion)
-        {
-            Boolean varRespuesta = false;
-            foreach (Solucion varSolucion in atrListaTabu)
-            {
-                if (varSolucion.Equals(parSolucion))
-                {
-                    varRespuesta = true;
-                }
-            }
-            return varRespuesta;
-        }
+        } 
     }
-
-    public class caracteristica
+    public class Caracteristica
     {
         public int atrCaracteristica; //valor de la dimension dentro del vector
         public int atrIteracion;
 
-        public caracteristica(int parCarateristica, int parIteracion)
+        public Caracteristica(int parCarateristica, int parIteracion)
         {
             atrCaracteristica = parCarateristica;
             atrIteracion = parIteracion;
-        }        
+        }  
+
+        public int getCaracteristica()
+        {
+            return this.atrCaracteristica;
+        }      
 
     }
-
-
-
 }

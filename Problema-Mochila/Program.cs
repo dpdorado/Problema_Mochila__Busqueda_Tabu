@@ -44,7 +44,7 @@ namespace OptimizacionBinaria
                 //Tabú sin características
                 new BusquedaTabu{pm = 0.5, radio = 10, MaxEFOs = 1000, MaxLongituLitaTabu = 10,atrNumeroTweaks=2},
                 //Tabú con caraterísticas,                                
-                new BusquedaTabuCaracterizada{pm = 0.5, radio = 10, MaxEFOs = 1000,atrNumeroTweaks=2, atrTimeTabu =5}
+                new BusquedaTabuConCaracteristicas {pm = 0.5, radio = 10, MaxEFOs = 1000, MaxLongitudListaTabu = 10,atrNumeroTweaks=2}                
             };
 
             var gestorR = new GestionResultados();
