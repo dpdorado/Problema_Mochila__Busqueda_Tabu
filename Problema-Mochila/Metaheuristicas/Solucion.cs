@@ -226,6 +226,5 @@ namespace OptimizacionBinaria.Metaheuristicas
             return this.esOptimoConocido();
         }
 
-      
     }
 }

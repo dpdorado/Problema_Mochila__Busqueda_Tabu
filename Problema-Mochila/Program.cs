@@ -5,6 +5,7 @@ using OptimizacionBinaria.Funciones;
 using OptimizacionBinaria.Metaheuristicas.EstadoSimple;
 using OptimizacionBinaria.Metaheuristicas.EstadoSimple.HC;
 using OptimizacionBinaria.Metaheuristicas.EstadoSimple.TS;
+using OptimizacionBinaria;
 
 namespace OptimizacionBinaria
 {
@@ -23,13 +24,13 @@ namespace OptimizacionBinaria
                 new Knapsack("f7.txt"),
                 new Knapsack("f8.txt"),
                 new Knapsack("f9.txt"),
-                new Knapsack("f10.txt"),
-                new Knapsack("Knapsack1.txt"),
+                new Knapsack("f10.txt")
+                /*new Knapsack("Knapsack1.txt"),
                 new Knapsack("Knapsack2.txt"),
                 new Knapsack("Knapsack3.txt"),
                 new Knapsack("Knapsack4.txt"),
                 new Knapsack("Knapsack5.txt"),
-                new Knapsack("Knapsack6.txt")
+                new Knapsack("Knapsack6.txt")*/
             };
             var misAlgoritmos = new List<Algoritmo>
             {
@@ -41,13 +42,20 @@ namespace OptimizacionBinaria
                 //Búsqueda aleatoria
                 new BusquedaAleatoria() {MaxEFOs = 1000},                
                 //Tabú sin características
-                new BusquedaTabu{pm = 0.5, radio = 10, MaxEFOs = 1000, MaxLongituLitaTabu = 10,atrNumeroTweaks=2}
+                new BusquedaTabu{pm = 0.5, radio = 10, MaxEFOs = 1000, MaxLongituLitaTabu = 10,atrNumeroTweaks=2},
                 //Tabú con caraterísticas,                                
-                //new BusquedaTabuCaracterizada{pm = 0.5, radio = 10, MaxEFOs = 1000,atrNumeroTweaks=2, atrTimeTabu =5}
+                new BusquedaTabuCaracterizada{pm = 0.5, radio = 10, MaxEFOs = 1000,atrNumeroTweaks=2, atrTimeTabu =5}
             };
 
-            Console.WriteLine("             Ascenso a la Colina (HC)  Búsqueda Aleatoria        Búsqueda Tabú             Búsqueda Tabú con características");
+            var gestorR = new GestionResultados();
+            var pathResultados = gestorR.copiarPlantilla();
+            var fi = 68;
+            var ci = 6;
+            var confila = 0;
+            var conColumna = 0;
+            //68,79 ----6,21            
             var count = 1;
+            Console.WriteLine("             Ascenso a la Colina (HC)  Búsqueda Aleatoria        Búsqueda Tabú             Búsqueda Tabú con características");
             foreach (var funcion in misFunciones)
             {
                 Console.Write("Problema " + count+ ":  ");                
@@ -79,15 +87,37 @@ namespace OptimizacionBinaria
                     //Desviación estandar
                     DE = calcularDE(mejSoluciones, mediaF);
                     //agregar a un archivo los datos
+
+                    
+                    if (confila == 12){confila=0;}
+                    if (conColumna == 12){conColumna=0;}
+
+                    var celda = convertirCelda(fi,confila,ci,conColumna);                                     
+                    gestorR.editarCelda(celda, mediaF, pathResultados);
+                    confila++;                    
+                    celda = convertirCelda(fi,confila,ci,conColumna);                                        
+                    gestorR.editarCelda(celda, DE, pathResultados);
+                    confila++;                    
+                    celda = convertirCelda(fi,confila,ci,conColumna);                                        
+                    gestorR.editarCelda(celda, tasaExito, pathResultados);
+                    confila++;                    
+
                     //Console.Write($"{mediaF,-25:0.0000}" + " | "+$"{DE,-25:0.0000}" +" | "+$"{tasaExito,-25:0.0000}");
                     Console.Write($"{mediaF,-25:0.000000000000000}" + " ");                    
                 }
                 Console.WriteLine();
                 count++;
-            }
-
+                conColumna++;
+            }                             
             Console.ReadKey();
         }
+
+        public static string convertirCelda(int fi, int confila, int ci, int conColumna)
+        {
+            var columan = ((char)(fi+confila)).ToString();
+            var fila = (ci+conColumna).ToString();
+            return columan+fila;
+        }        
 
         public static double calcularDE(ArrayList mSoluciones, double M)
         {
