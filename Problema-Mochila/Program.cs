@@ -32,19 +32,20 @@ namespace OptimizacionBinaria
                 new Knapsack("Knapsack5.txt"),
                 new Knapsack("Knapsack6.txt")*/
             };
+            var max=1000;
             var misAlgoritmos = new List<Algoritmo>
             {
                 //HC
-                new AscensoColina {pm = 0.5, radio = 10, MaxEFOs = 1000},
+                new AscensoColina {MaxEFOs = max},
                 //new AscensoColinaMaximaPendiente {pm = 0.5, radio = 10, vecinos = 10, MaxEFOs = 5000},
                 //new AscensoColinaMaximaPendienteConRemplazo {pm = 0.5, radio = 10, vecinos = 10, MaxEFOs = 5000},
                 //new AscensoColinaConReinicios {ProbabilidadDeMutacion = 0.5, radio = 10, maxLocalIter = 15, MaxEFOs = 5000},                
                 //Búsqueda aleatoria
-                new BusquedaAleatoria() {MaxEFOs = 1000},                
+                new BusquedaAleatoria() {MaxEFOs = max},                
                 //Tabú sin características
-                new BusquedaTabu{pm = 0.5, radio = 10, MaxEFOs = 1000, MaxLongituLitaTabu = 10,atrNumeroTweaks=2},
+                new BusquedaTabu{MaxEFOs = max,atrNumeroTweaks=2},
                 //Tabú con caraterísticas,                                
-                new BusquedaTabuConCaracteristicas {pm = 0.5, radio = 10, MaxEFOs = 1000, MaxLongitudListaTabu = 10,atrNumeroTweaks=2}                
+                new BusquedaTabuConCaracteristicas {MaxEFOs = max,atrNumeroTweaks=2}                
             };
 
             var gestorR = new GestionResultados();
@@ -69,8 +70,9 @@ namespace OptimizacionBinaria
                     ArrayList mejSoluciones = new ArrayList();
                     for (var rep = 0; rep < maxRep; rep++)
                     {
-                        var aleatorio = new Random(rep);
-                        var aleatorio2 = new Random(rep + 2);
+                        var seed = Environment.TickCount;
+                        var aleatorio = new Random(seed);
+                        //var aleatorio2 = new Random(rep + 2);
 
                         algoritmo.Ejecutar(funcion, aleatorio);
                         mediaF += algoritmo.MejorSolucion.fitness;

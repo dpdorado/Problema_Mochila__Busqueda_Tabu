@@ -30,7 +30,6 @@ namespace OptimizacionBinaria
 
         public void editarCelda(string celda, double valor, string path)
         {
-            //var workbook = new XLWorkbook("HelloWorld.xlsx"); // load the existing Excel file
             var workbook = new XLWorkbook(path); // load the existing Excel file
             var worksheet = workbook.Worksheets.Worksheet(1);
             worksheet.Cell(celda).SetValue(valor);

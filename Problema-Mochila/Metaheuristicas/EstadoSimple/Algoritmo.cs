@@ -8,7 +8,7 @@ namespace OptimizacionBinaria.Metaheuristicas.EstadoSimple
         public int MaxEFOs;
         public int EFOs;
         public Solucion MejorSolucion;
-
+       
         public abstract void Ejecutar(Knapsack elProblema, Random aleatorio);
     
     }

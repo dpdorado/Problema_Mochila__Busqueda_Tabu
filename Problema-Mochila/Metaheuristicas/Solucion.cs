@@ -59,7 +59,7 @@ namespace OptimizacionBinaria.Metaheuristicas
         }
 
         //Tabú caracterizado
-        public void Tweak(Random aleatorio, double pm, double radio, ArrayList parListaTabu)
+        public void Tweak(Random aleatorio, ArrayList parListaTabu)
         {
             // Paso 1 = Intercambiar un objeto seleccionado por uno no seleccionado
             var seleccionados = new List<KeyValuePair<int, double>>();
@@ -85,7 +85,7 @@ namespace OptimizacionBinaria.Metaheuristicas
                 }
 
                 pruebas++;
-                if (pruebas >= 3) return; // No trato de hacer Tweak
+                if (pruebas >= 3) return; // No trato de hacer TweFak
             } while (noSeleccionados.Count == 0);
 
             _dimensiones[seleccionados[p].Key] = 0;
@@ -123,7 +123,7 @@ namespace OptimizacionBinaria.Metaheuristicas
         }
 
         //Tabu simple, demas algoritmos
-        public void Tweak(Random aleatorio, double pm, double radio)
+        public void Tweak(Random aleatorio)
         {
             // Paso 1 = Intercambiar un objeto seleccionado por uno no seleccionado
             var seleccionados = new List<KeyValuePair<int, double>>();

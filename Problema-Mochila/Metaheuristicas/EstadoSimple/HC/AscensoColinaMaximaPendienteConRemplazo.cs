@@ -22,12 +22,14 @@ namespace OptimizacionBinaria.Metaheuristicas.EstadoSimple.HC
             {
                 // r es Tweak de la copia de s
                 var r = new Solucion(s);
-                r.Tweak(aleatorio, pm, radio);
+                //r.Tweak(aleatorio, pm, radio);
+                r.Tweak(aleatorio);
 
                 for (var v = 0; v < vecinos - 1; v++)
                 {
                     var w = new Solucion(s);
-                    w.Tweak(aleatorio, pm, radio);
+                    //w.Tweak(aleatorio, pm, radio);
+                    w.Tweak(aleatorio);
                     
                     if (w.fitness < r.fitness)
                         r = w;

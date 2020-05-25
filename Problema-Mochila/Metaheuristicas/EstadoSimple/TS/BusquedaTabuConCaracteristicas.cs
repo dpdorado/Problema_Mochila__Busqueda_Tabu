@@ -9,13 +9,14 @@ namespace OptimizacionBinaria.Metaheuristicas.EstadoSimple.TS
         public int MaxLongitudListaTabu;
         public int atrNumeroTweaks;
         private ArrayList atrListaTabu = new ArrayList();
-        public double pm = 0.5;
-        public double radio = 10;
+        //public double pm = 0.5;
+        //public double radio = 10;
         public int atrIteracionActual;
 
 
         public override void Ejecutar(Knapsack parProblema, Random ParAleatorio)
         {
+            this.retoqueParametros(parProblema);
             EFOs = 0;
             // Solución inicial
             var S = new Solucion(parProblema, this);
@@ -29,11 +30,13 @@ namespace OptimizacionBinaria.Metaheuristicas.EstadoSimple.TS
                 // Remover de la lista Tabú todas las tublas en la iteracion c - d > l
                 this.DeleteListaCaracteristicas();
                 var R = new Solucion(S);                               
-                R.Tweak(ParAleatorio, pm, radio, this.atrListaTabu);
+                //R.Tweak(ParAleatorio, pm, radio, this.atrListaTabu);
+                R.Tweak(ParAleatorio,this.atrListaTabu);
                 for (var i = 0; i < this.atrNumeroTweaks - 1; i++)
                 {
                     var W = new Solucion(S);
-                    W.Tweak(ParAleatorio, pm, radio,atrListaTabu);
+                    //W.Tweak(ParAleatorio, pm, radio,atrListaTabu);
+                    W.Tweak(ParAleatorio,this.atrListaTabu);
                     if (W.fitness > R.fitness)
                         R = W;
                     if (EFOs >= this.MaxEFOs || R.esOptimoConocido()) break;               
@@ -44,6 +47,10 @@ namespace OptimizacionBinaria.Metaheuristicas.EstadoSimple.TS
                     MejorSolucion = new Solucion(S);            
             }
 
+        }
+        public void retoqueParametros(Knapsack parProblema)
+        {            
+            this.MaxLongitudListaTabu = parProblema.TotalItems;            
         }
 
         private void AddListaCarateristicas(Solucion parSolucion, int parIteracion)

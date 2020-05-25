@@ -22,7 +22,9 @@ namespace OptimizacionBinaria.Metaheuristicas.EstadoSimple.HC
                 // r es copia de s
                 var r = new Solucion(s);
                 //tweak
-                r.Tweak(aleatorio, pm, radio);
+                
+                r.Tweak(aleatorio);
+                //r.Tweak(aleatorio, pm, radio);
 
                 if (r.fitness > s.fitness) //se esta maximizando
                 {

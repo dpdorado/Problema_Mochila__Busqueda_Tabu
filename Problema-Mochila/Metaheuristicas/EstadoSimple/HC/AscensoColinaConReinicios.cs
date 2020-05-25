@@ -26,7 +26,8 @@ namespace OptimizacionBinaria.Metaheuristicas.EstadoSimple.HC
                 for (var local = 0; local < time; local++) { // linea 6
                     // linea 7 - r es tweak copia de s
                     var r = new Solucion(s);
-                    r.Tweak(aleatorio, ProbabilidadDeMutacion, radio);
+                    //r.Tweak(aleatorio, ProbabilidadDeMutacion, radio);
+                    r.Tweak(aleatorio);
 
                     if (r.fitness < s.fitness) // linea 8 -se esta minimizando
                         s = r; // linea 9
