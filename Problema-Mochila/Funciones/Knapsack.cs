@@ -5,7 +5,7 @@ namespace OptimizacionBinaria.Funciones
 {
     public class Knapsack
     {
-        private const string RootDirectory = "/home/dpdaniel/Pruebas/Parcial 1 - Metaheuristicas/Problema-Mochila/knapsack-files/";        
+        private const string RootDirectory = "/home/dpdaniel/Pruebas/Parcial 1 - Metaheuristicas/Problema_Mochila__Busqueda_Tabu/Problema-Mochila/knapsack-files/";        
         public int TotalItems;
         public double Capacity;
         public double OptimalKnown;
